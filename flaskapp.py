@@ -4,5 +4,5 @@ import web_scrape
 
 app = Flask (__name__)
 
-app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/flaskapp"
 mongo = PyMongo(app)
