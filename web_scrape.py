@@ -37,14 +37,20 @@ relative_image_path = images_soup.find_all('img')[3]["src"]
 featured_image_url = jpl_nasa_url + relative_image_path
 print(featured_image_url)
 
-mars_weather_url = "https://twitter.com/marswxreport?lang=en"
-browser.visit(mars_weather_url)
-mars_weather_html = browser.html
-weather_soup = bs(mars_weather_html, "html.parser")
-
-mars_weather = weather_soup.find("span", class_= "css-901oao.css-16my406.r-1qd0xha.r-ad9z0x.r-bcqeeo.r-qvutc0").get_text()
-mars_weather
-
 mars_facts_url = "https://space-facts.com/mars/"
 mars_facts = pd.read_html(mars_facts_url)
 mars_facts
+
+mars_facts_df = mars_facts[2]
+mars_facts_df.columns = ["Description", "Values"]
+mars_facts_df
+
+mars_html = mars_facts_df.to_html()
+mars_html.replace("\n", " ")
+print(mars_html)
+
+usgs_url = "https://astrogeology.usgs.gov"
+hemisphere_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+browser.visit(hemisphere_url)
+hemisphere_html = browser.html
+hemisphere_soup = bs(hemisphere_html, "html.parser")
