@@ -54,3 +54,18 @@ hemisphere_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enha
 browser.visit(hemisphere_url)
 hemisphere_html = browser.html
 hemisphere_soup = bs(hemisphere_html, "html.parser")
+
+hemisphere_items = hemisphere_soup.find_all("div", class_="item")
+
+image_urls =[]
+
+for i in hemisphere_items:
+    title = i.find("h3").text
+    img_url_1 = i.find("a", class_="itemLink product-item")["href"]
+    browser.visit(usgs_url+img_url_1)
+    img_html = browser.html
+    img_soup = bs(img_html, "html.parser")
+    img_url_2 = usgs_url + img_soup.find("img", class_="wide-image")["src"]
+    image_urls.append({"title": title, "img_url":img_url_2})
+    
+image_urls
