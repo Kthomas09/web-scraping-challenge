@@ -41,3 +41,10 @@ mars_weather_url = "https://twitter.com/marswxreport?lang=en"
 browser.visit(mars_weather_url)
 mars_weather_html = browser.html
 weather_soup = bs(mars_weather_html, "html.parser")
+
+mars_weather = weather_soup.find("span", class_= "css-901oao.css-16my406.r-1qd0xha.r-ad9z0x.r-bcqeeo.r-qvutc0").get_text()
+mars_weather
+
+mars_facts_url = "https://space-facts.com/mars/"
+mars_facts = pd.read_html(mars_facts_url)
+mars_facts
