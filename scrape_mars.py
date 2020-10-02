@@ -70,14 +70,14 @@ def scrape():
         image_urls.append({"title": title, "img_url":img_url_2})
     
     mars_dict = {
-        "News Title": news_title,
-        "News Article": news_content,
-        "Featured Image": featured_image_url,
-        "Mars Facts": str(mars_html),
-        "Mars Hemispheres": image_urls
+        "News_Title": news_title,
+        "News_Article": news_content,
+        "Featured_Image": featured_image_url,
+        "Mars_Facts": str(mars_html),
+        "Mars_Hemispheres": image_urls
     }
 
     browser.quit()
-
+    
     return mars_dict
         

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hot Finds</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="jumbotron text-center border-bottom">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape Mars Data</a></p>
+        </div>
+
+
+        <div class="row" id="mars_scrape">
+            <div class="col-md-12">
+                <h2><u>Latest Mars News Article</u></h2>
+            </div>
+        </div>
+        </br>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="heading">{{mars.News_Title}}</h4>
+                <p>{{mars.News_Article}}</p>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="row">
+                <div class="col-md-8 border">
+                    <h2 class=""><u>Featured Martian Image</u></h2>
+                    </br>
+                    <img src="{{mars.Featured_Image}}" alt="Mars Featured Image">
+                </div>
+                <div class="col-md-4">
+                    <div class="border">
+                        <h5>Mars Facts</h5>
+                        {{mars.Mars_Facts}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-8 offest-4">
+                    <h2 class="align-items-center"><u>Mars Hemispheres</u></h2>
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                {% for hemisphere in mars.Mars_Hemispheres%}
+                <div class="col 6 border">
+                    </br>
+                    <div>
+                        <img width="500 px" height="500 px" src="{{hemisphere.img_url | safe}}">
+                    </div>
+                    <div>
+                        <h4> {{himisphere.title | safe }}</h4>
+                    </div>
+                </div>
+                {& endfor %}
+            </div>
+            <hr>
+        </div>
+    </div>
+</body>
+
+</html>
