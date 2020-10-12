@@ -7,6 +7,7 @@ import pymongo
 import time
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
+import time
 
 def init_browser():
     # launching chromedriver to automate the webscrape
@@ -48,27 +49,23 @@ def scrape():
 
     mars_html = mars_facts_df.to_html()
     mars_html.replace("\n", " ")
+################################################
 
+# Mars Hemispheres
+    astro_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    browser.visit(astro_url)
+    time.sleep(2)
+    links = browser.find_by_css("a.product-item h3")
+# Retreive all items that contain Mars hemispheres information
+    image_urls = []
+    for i in range(len(links)):
+        hemi = {}
+        browser.find_by_css("a.product-item h3")[i].click()
+        hemi["img_url"] = browser.find_by_text("Sample")["href"]
+        hemi["title"] = browser.find_by_css("h2.title").text
+        image_urls.append(hemi)
+        browser.back()
 
-    usgs_url = "https://astrogeology.usgs.gov"
-    hemisphere_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-    browser.visit(hemisphere_url)
-    hemisphere_html = browser.html
-    hemisphere_soup = bs(hemisphere_html, "html.parser")
-
-    hemisphere_items = hemisphere_soup.find_all("div", class_="item")
-
-    image_urls =[]
-
-    for i in hemisphere_items:
-        title = i.find("h3").text
-        img_url_1 = i.find("a", class_="itemLink product-item")["href"]
-        browser.visit(hemisphere_url+img_url_1)
-        img_html = browser.html
-        img_soup = bs(img_html, "html.parser")
-        img_url_2 = hemisphere_url + img_soup.find("img", target_="blank")["src"]
-        image_urls.append({"title": title, "img_url":img_url_2})
-    
     mars_dict = {
         "News_Title": news_title,
         "News_Article": news_content,
@@ -80,4 +77,24 @@ def scrape():
     browser.quit()
     
     return mars_dict
+
+    # hemisphere_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    # browser.visit(hemisphere_url)
+    # hemisphere_html = browser.html
+    # hemisphere_soup = bs(hemisphere_html, "html.parser")
+
+    # hemisphere_items = hemisphere_soup.find_all("div", class_="item")
+
+    # image_urls =[]
+
+    # for i in hemisphere_items:
+    #     title = i.find("h3").text
+    #     img_url_1 = i.find("a", class_="itemLink product-item")["href"]
+    #     browser.visit(hemisphere_url+img_url_1)
+    #     img_html = browser.html
+    #     img_soup = bs(img_html, "html.parser")
+    #     img_url_2 = hemisphere_url + img_soup.find("img", class_="thumb")["src"]
+    #     image_urls.append({"title": title, "img_url":img_url_2})
+    
+    
         
