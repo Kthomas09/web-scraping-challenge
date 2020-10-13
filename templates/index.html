@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Head components -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +11,13 @@
 </head>
 
 <body>
+    <!-- Setting up top banner and button to perform scrape -->
     <div class="container">
-
         <div class="jumbotron text-center border-bottom">
             <h1>Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape Mars Data</a></p>
         </div>
-
-
+<!-- Div to place the latest mars news scrape -->
         <div class="row" id="mars_scrape">
             <div class="col-md-12">
                 <h2><u>Latest Mars News Article</u></h2>
@@ -32,12 +32,14 @@
         </div>
         <hr>
         <div>
+            <!-- Div to place the Featured Martian Image from scrape -->
             <div class="row">
                 <div class="col-md-8 border">
                     <h2 class=""><u>Featured Martian Image</u></h2>
                     </br>
                     <img src="{{mars_dict.Featured_Image}}" alt="Mars Featured Image">
                 </div>
+                <!-- Div to place the mars facts from scrape -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
@@ -51,6 +53,7 @@
             </div>
         </div>
         <hr>
+        <!-- Area to place martian hemisphere  -->
         <div class="row">
             <div class="col-md-8 offest-4">
                 <h2 class="align-items-center"><u>Mars Hemispheres</u></h2>
@@ -68,6 +71,7 @@
                             <h5>Mars Hemispheres</h5>
                         </div>
                         <hr>
+                        <!-- for loop to iterate trhough the Mars_Hemisphere key and place on webpage -->
                         <div class="row" id="images">
                             {% for hemisphere in mars_dict.Mars_Hemispheres %}
                                 <div class = "col-md-6">
